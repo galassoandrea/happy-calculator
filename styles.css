@@ -72,6 +72,10 @@ body {
 
 @media screen and (max-width: 400px) {
 
+    *{
+        font-size: 35px;
+    }
+
     body {
         background-color: var(--dark-blue);
     }
@@ -89,11 +93,15 @@ body {
         margin: 0;
         padding: 40px 10px;
         border-radius: 0;
-        font-size: 37px;
+        font-size: 45px;
+    }
+
+    .btn-container {
+        margin-top: 40px;
     }
 
     .btn {
-        width: 50px;
+        width: 58px;
         margin: 12px;
         padding: 5px 0;
     }
