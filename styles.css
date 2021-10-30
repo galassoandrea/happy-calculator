@@ -4,7 +4,7 @@
     --light-fuchsia: #FF5DA2;
     --water-green: #99DDCC;
     --mid-purple: #7413A8;
-    /* --mid-fuchsia:  */
+    --mid-fuchsia: #C2467C;
 }
 
 *{
@@ -14,6 +14,7 @@
 
 body {
     background-color: var(--light-fuchsia);
+    margin: 0;
 }
 
 .calculator {
@@ -64,5 +65,36 @@ body {
 }
 
 .btn-option:hover {
-    background-color: #C2467C;
+    background-color: var(--mid-fuchsia);
+}
+
+/** Small screens */
+
+@media screen and (max-width: 400px) {
+
+    body {
+        background-color: var(--dark-blue);
+    }
+
+    .calculator {
+        width: 100%;
+        padding-top: 0;
+        margin: 0;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .screen {
+        width: auto;
+        margin: 0;
+        padding: 40px 10px;
+        border-radius: 0;
+        font-size: 37px;
+    }
+
+    .btn {
+        width: 50px;
+        margin: 12px;
+        padding: 5px 0;
+    }
 }
