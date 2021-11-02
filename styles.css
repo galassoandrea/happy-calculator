@@ -36,6 +36,18 @@ body {
     font-size: 40px;
 }
 
+.main-screen {
+    font-size: 40px;
+    margin: 0;
+}
+
+.little-screen {
+    font-size: 17px;
+    text-align: left;
+    margin: 0;
+    height: 7px;
+}
+
 .btn-container {
     display: grid;
     grid-template-columns: auto auto auto auto;
