@@ -11,14 +11,20 @@ for (let i = 0; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener("click", function() {
         value = numberButtons[i].textContent;
 
-        /** If the screen is empty or I've already inserted the first term 
-         *  than it allows me to insert the second term */ 
+        /** The user can insert a maximum of 12 characters on the screen */
 
-        if (mainScreen.innerHTML == 0.00 || mainScreen.innerHTML == a) {
-            mainScreen.innerHTML = value;
-        } else {
-            mainScreen.innerHTML += value;
+        if(mainScreen.innerHTML.length < 12) {
+
+            /** If the screen is empty or I've already inserted the first term 
+             *  than it allows me to insert the second term */ 
+
+            if (mainScreen.innerHTML == 0.00 || mainScreen.innerHTML == a) {
+                mainScreen.innerHTML = value;
+            } else {
+                mainScreen.innerHTML += value;
+            }
         }
+
     });
 }
 
@@ -34,19 +40,21 @@ for (let j = 0; j < optionButtons.length; j++) {
                 a = mainScreen.innerHTML;
                 operation = "-";
                 littleScreen.innerHTML = a + "-";
-                mainScreen.innerHTML = "";
                 break;
             case "X": 
                 a = mainScreen.innerHTML;
                 operation = "X";
                 littleScreen.innerHTML = a + "x";
-                mainScreen.innerHTML = "";
                 break;
             case "/": 
                 a = mainScreen.innerHTML;
                 operation = "/";
                 littleScreen.innerHTML = a + "/";
-                mainScreen.innerHTML = "";
+                break;
+            case "%": 
+                a = mainScreen.innerHTML;
+                operation = "%";
+                littleScreen.innerHTML = a + "%";
                 break;
             case "=": 
                 calculate(a, operation);
