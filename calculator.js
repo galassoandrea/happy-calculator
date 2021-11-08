@@ -3,9 +3,10 @@ const optionButtons = document.querySelectorAll(".btn-option");
 const mainScreen = document.querySelector(".main-screen");
 const littleScreen = document.querySelector(".little-screen");
 let value = 0;
-let a = 0;
-let b = 0;
+let a = null;
+let b = null;
 let operation = null;
+let res = 0;
 
 for (let i = 0; i < numberButtons.length; i++) {
     numberButtons[i].addEventListener("click", function() {
@@ -18,7 +19,7 @@ for (let i = 0; i < numberButtons.length; i++) {
             /** If the screen is empty or I've already inserted the first term 
              *  than it allows me to insert the second term */ 
 
-            if (mainScreen.innerHTML == 0.00 || mainScreen.innerHTML == a) {
+            if (mainScreen.innerHTML === "0.00" || mainScreen.innerHTML == a) {
                 mainScreen.innerHTML = value;
             } else {
                 mainScreen.innerHTML += value;
@@ -32,24 +33,20 @@ for (let j = 0; j < optionButtons.length; j++) {
     optionButtons[j].addEventListener("click", function() {
         switch (optionButtons[j].innerHTML) {
             case "+":
-                a = mainScreen.innerHTML;
-                operation = "+";
-                littleScreen.innerHTML = a + "+";
+                operation = "+"
+                checkForMultipleOperation(operation);
                 break;
             case "-": 
-                a = mainScreen.innerHTML;
                 operation = "-";
-                littleScreen.innerHTML = a + "-";
+                checkForMultipleOperation(operation);
                 break;
             case "X": 
-                a = mainScreen.innerHTML;
                 operation = "X";
-                littleScreen.innerHTML = a + "x";
+                checkForMultipleOperation(operation);
                 break;
             case "/": 
-                a = mainScreen.innerHTML;
                 operation = "/";
-                littleScreen.innerHTML = a + "/";
+                checkForMultipleOperation(operation);
                 break;
             case "%": 
                 a = mainScreen.innerHTML;
@@ -103,5 +100,31 @@ function calculate(a, operator) {
                 littleScreen.innerHTML += b + "=" + result;
                 break;
         }
+    }
+}
+
+function checkForMultipleOperation(operation) {
+    if((littleScreen.innerHTML.endsWith("+" || "-" || "*" || "/"))) {
+        switch (operation) {
+            case "+":
+                res = parseFloat(a) + parseFloat(mainScreen.innerHTML);
+                break;
+            case "-":
+                res = parseFloat(a) - parseFloat(mainScreen.innerHTML);
+                break;
+            case "X":
+                res = parseFloat(a) * parseFloat(mainScreen.innerHTML);
+                break;       
+            default:
+                res = parseFloat(a) / parseFloat(mainScreen.innerHTML);
+                break;
+        }
+
+        littleScreen.innerHTML += mainScreen.innerHTML + operation;
+        mainScreen.innerHTML = res;
+        a = res;
+    } else {
+        a = mainScreen.innerHTML;
+        littleScreen.innerHTML = a + operation;
     }
 }
