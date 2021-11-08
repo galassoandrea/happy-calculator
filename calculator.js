@@ -33,7 +33,7 @@ for (let j = 0; j < optionButtons.length; j++) {
     optionButtons[j].addEventListener("click", function() {
         switch (optionButtons[j].innerHTML) {
             case "+":
-                operation = "+"
+                operation = "+";
                 checkForMultipleOperation(operation);
                 break;
             case "-": 
@@ -41,7 +41,7 @@ for (let j = 0; j < optionButtons.length; j++) {
                 checkForMultipleOperation(operation);
                 break;
             case "X": 
-                operation = "X";
+                operation = "x";
                 checkForMultipleOperation(operation);
                 break;
             case "/": 
@@ -65,11 +65,11 @@ for (let j = 0; j < optionButtons.length; j++) {
 
 }
 
-function calculate(a, operator) {
+function calculate(a, operation) {
     let result = 0;
     if (a != 0) {
         b = mainScreen.innerHTML;
-        switch (operator) {
+        switch (operation) {
 
             /** After detecting the operation, print the full operation on the upper screen
              *  and only the result on the main screen */
@@ -84,7 +84,7 @@ function calculate(a, operator) {
                 mainScreen.innerHTML = result;
                 littleScreen.innerHTML += b + "=" + result;
                 break;
-            case "X":
+            case "x":
                 result = parseFloat(a) * parseFloat(b);
                 mainScreen.innerHTML = result;
                 littleScreen.innerHTML += b + "=" + result;
@@ -103,22 +103,35 @@ function calculate(a, operator) {
     }
 }
 
+/** Function that allows us to do operations in sequence */
+
 function checkForMultipleOperation(operation) {
-    if((littleScreen.innerHTML.endsWith("+" || "-" || "*" || "/"))) {
-        switch (operation) {
+
+    let lastCharInserted = littleScreen.innerHTML.slice(littleScreen.innerHTML.length - 1);
+    
+    if(lastCharInserted === "+" || lastCharInserted === "-" || lastCharInserted === "x" || lastCharInserted === "/") {
+
+        console.log(lastCharInserted);
+
+        /** Check which is the last operator digited, doing the corresponding operation and
+         *  saving the temporary result inside res */
+
+        switch (lastCharInserted) {
             case "+":
                 res = parseFloat(a) + parseFloat(mainScreen.innerHTML);
                 break;
             case "-":
                 res = parseFloat(a) - parseFloat(mainScreen.innerHTML);
                 break;
-            case "X":
+            case "x":
                 res = parseFloat(a) * parseFloat(mainScreen.innerHTML);
                 break;       
             default:
                 res = parseFloat(a) / parseFloat(mainScreen.innerHTML);
                 break;
         }
+
+        /** Update the screens */
 
         littleScreen.innerHTML += mainScreen.innerHTML + operation;
         mainScreen.innerHTML = res;
